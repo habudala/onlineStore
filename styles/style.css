@@ -1,0 +1,142 @@
+* {margin:0px;
+   padding:0px;}
+body {margin:0px;
+	  padding:0px;}
+
+#mainWrapper {text-align: center;
+			  margin:auto;
+			  width:1280px;
+			  border:1px dashed black;
+			  box-sizing: border-box;
+			}
+#pageHeader {background-color:#eff1f4;
+			 border:1px dashed #f9fafc;
+			  box-sizing: border-box;
+			 width:100%;
+			 margin:auto;
+			 text-align:center;}
+
+
+
+	#headerCont	{width:100%;
+				 text-align:left;
+				}	 
+
+
+
+
+     #logo {width:140px;
+     		height:140px;
+     		display:inline-block;
+     		text-align:left;
+     		margin:15px;
+     		margin-left:29px;
+     		}
+
+
+
+     		#logo>img {width:150px;
+     				   height:150px;
+     				   border:1px dashed white;
+     				   border-radius:50%;
+     		}
+
+
+     #headRight {border:1px solid #bdd1fc;
+			     box-sizing: border-box;
+			     width: 995px;
+			     display:inline-block;
+			     height:140px;
+			     margin-left:58px;
+			     }
+
+
+
+		#navbar {margin-top:15px; margin-bottom:15px;}
+
+		#navbar>nav>ul>a>li {display:inline-block;
+							 list-style: none;
+							 padding:0px 15px 0px 15px;}
+
+
+
+
+
+#pageContent {background-color:#eff1f4;
+			  border:1px solid #bdd1fc;
+			  width:100%;
+			  margin:auto;
+			  text-align:left;
+			  overflow:hidden;}
+
+	#pageContent h1{font-size:40px; text-align:center; margin-top:20px; margin-bottom:20px;}
+	#pageContent h2{text-align:center; margin-top:15px; margin-bottom:15px;}
+	#pageContent div{margin:auto;}
+
+	    #adminNav>ul>a>li {list-style: none;}
+
+	    #addInventory {border:1px solid #bdd1fc;
+	    			   text-align:right;}
+
+
+	 #mainCol1 {
+	 			background-color:#f9fafc;
+	 			min-height: 200px;
+	 			float:left;
+	 			width:225px;
+	 			box-sizing: border-box;
+	 			border: 1px solid #bdd1fc;}
+
+	 #mainCol2 {
+	 			background-color:#f9fafc;
+	 			min-height: 200px;
+	 			float:right;
+	 			width:225px;
+	 			box-sizing: border-box;
+	 			border: 1px solid #bdd1fc;}
+
+
+
+	 .sideBar>h3 {margin:20px 10px 15px 10px;}
+	 .sideBar>p {margin:0px 10px 20px 10px;}
+	 .sideBar>a {margin:15px 20px 20px 10px;}
+
+	 #mainCol {width:830px;
+	 			background-color:#f9fafc;
+	 			min-height: 200px;
+	 			margin-left:200px;
+	 			margin-right:200px;
+	 			box-sizing: border-box;
+	 			border: 1px solid #bdd1fc;}
+	
+	 		#mainCol h2 {text-align: center}
+
+	 		#prodImg {width:170px;
+	 				  height:170px;}
+
+
+
+	    #InvFormCont {  }
+
+	    /*--------------------TABLES------------------*/
+	    #adminLogin {text-align: center;}
+	    #adminLogin>form {margin:auto;}
+
+	    #myForm {}
+	    #myTable,tr,td {border:1px dashed grey;
+	    				padding:10px;
+	    				margin:auto;
+	    				}
+
+	    #featured{padding:0px;}
+	 		#featured>tr {padding:0px;}
+	 		#featured>tr>td {padding:0px; margin:auto;}
+
+
+#pageFooter {background-color:#eff1f4;
+			 border:1px solid #bdd1fc;
+			 width:100%;
+			 margin:auto;
+			 padding-top:25px;
+			 padding-bottom:25px;
+			 text-align:center;}

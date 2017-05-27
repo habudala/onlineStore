@@ -1,0 +1,1 @@
+<div id="pageFooter">&copy; Copyright LHDIGITALS.net</div>
