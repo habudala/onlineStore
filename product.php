@@ -6,53 +6,40 @@ ini_set('display_errors','1');
 ?>
 <!-- ///////////////////////////////////////////////////////////////////////////// -->
 <?php
+// Connect to MySQL DB
+include "storeScripts/connect_to_mysql.php";
+
+
 // Check to see is the URL variable is set and if it exists in db
 if(isset($_GET['id'])) {
 	$id = $_GET['id'];
 	//cleansing variable so people can't type in anything in the URL
 	$id = preg_replace('#[^0-9]#i','',$_GET['id']);
-} else {
-	echo "No product in the system with that ID";
-}
-?>
-<!-- ///////////////////////////////////////////////////////////////////////////// -->
-<?php
-// Run a SELECT query in MySQL to get the last 6 items
-// Connect to MySQL DB
-include "storeScripts/connect_to_mysql.php";
-// this block grabs the whole list for viewing
-$dynamicList = ""; // initializing variable
-$sql = "SELECT * FROM products ORDER BY date_added DESC LIMIT 6";
-$result = mysqli_query($connection, $sql);
-$productCount = mysqli_num_rows($result); // counting the output amount
+	// Use this variable to check if ID exists, and if so, get the product details
+	//IF no, the exits with a message.
+	$sql = "SELECT * FROM products WHERE id = '$id' LIMIT 1";
+	$result = mysqli_query($connection, $sql);
+	$productCount = mysqli_num_rows($result); // counting the output amount
+	if($productCount > 0) {
+		// get all product details
+		while($row = mysqli_fetch_array($result)) {
 
-if($productCount > 0) {
-	while($row = mysqli_fetch_array($result)) {
-		$id = $row["id"];
-		$price = $row["price"];
-		$product_name = $row["product_name"];
-		$date_added = strftime("%b %d %Y", strtotime($row["date_added"]));
-		$dynamicList.= '<table id="featured" width="100%">
-					<tr>
-						<td width="25%">
-							<a href="product.php?id=' . $id . '">
-								<img id="prodImg" src="inventory_images/' . $id . '.jpg"/>
-							</a>
-						</td>
-						<td width="75%" valigh="top">' . $product_name . '
-						<br/>
-						$' . $price . '<br/>
-						<a href="product.php?id=' . $id . '">View Product</a><br/>
-						</td>
-					</tr>
-				</table>';
-
-		/*&bull; &nbsp;  $date_added - $id - $product_name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href='inventory_edit.php?pid=$id'>edit</a> &bull; <a href='inventory_list.php?deleteid=$id'>delete</a><br/>"*/
+			$product_name = $row["product_name"];
+			$price = $row["price"];
+			$category = $row["category"];
+			$subategory = $row["subcategory"];
+			$details = $row["details"];
+			$date_added = strftime("%b %d %Y", strtotime($row["date_added"]));
+		}
+	} else {
+		echo "This item does not exist";
 	}
-
-}else{
-	$dynamicList = "You have no products in the system";
+} else {
+	echo "No data available to render this page... Sorry!";
+	exit();
 }
+
+
 
 
 
@@ -60,10 +47,12 @@ if($productCount > 0) {
 // CLOSE DB CONNECTION
 mysqli_close($connection);
 ?>
+<!-- ///////////////////////////////////////////////////////////////////////////// -->
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>$dynamicTitle</title>
+	<title><?php echo $product_name; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
@@ -73,59 +62,13 @@ mysqli_close($connection);
 			<div id=welcome>
 				<h1>Welcome to NOMAD Online Store</h1>
 			</div>
-			<div class="sideBar" id="mainCol1">
-				<h3>Dummy Title of a Paragraph 1</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-				<h3>Dummy Title of a Paragraph 2</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-				<h3>Dummy Title of a Paragraph 3</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-				<h3>Dummy Title of a Paragraph 4</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-				<h3>Dummy Title of a Paragraph 5</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-			</div>
-			<div class="sideBar" id="mainCol2">
-				<br/>
-				<h3>Dummy Title of a Paragraph 6</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-				<h3>Dummy Title of a Paragraph 7</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-				<h3>Dummy Title of a Paragraph 8</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-				<h3>Dummy Title of a Paragraph 9</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-				<h3>Dummy Title of a Paragraph 10</h3>
-				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
-				</p>
-				<a href="#">Learn more  >>></a>
-			</div>
-			<div id="mainCol">
-				<h2>Our Newest Items</h2>
-				<?php echo $dynamicList;?>
-			<!-- 	<table width="100%" border="0" cellspacing="0" cellpadding="3">
+			<div id="mainCont">
+				<h2>Product Page</h2>
+				<table width="100%">
 					<tr>
 						<td width="25">
 							<a href="product.php?">
-								<img src=""/>
+								<img src="inventory_images/<?php echo $id; ?>.jpg"/>
 							</a>
 						</td>
 						<td width="75%" valigh="top">
@@ -134,8 +77,21 @@ mysqli_close($connection);
 						<a href="product.php?">View Product</a><br/>
 						</td>
 					</tr>
-				</table> -->
-			</div><!-- mainCol ENDING-->
+				</table>
+			</div><!-- mainCont ENDING-->
+			<div  id="sideCol">
+				<h3>Dummy Title of a Paragraph 1</h3>
+				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
+				</p>
+				<a href="#">Learn more  >>></a>
+				<h3>Dummy Title of a Paragraph 2</h3>
+				<p>Lorem ipsum dolor sit amet, his ne decore utamur nonumes, sit te solum nostrum. In equidem disputando dissentiet eum, probo inani aliquando eos et. No vel meis tamquam delicata, et sit laoreet singulis partiendo. Ei vim dicam maiorum copiosae, sit omnium nostrud veritus ad.
+				</p>
+				<a href="#">Learn more  >>></a>
+			
+				
+			</div>
+			
 		</div>	
 		<div id="pageFooter">
 			<?php include_once("template_footer.php"); ?>

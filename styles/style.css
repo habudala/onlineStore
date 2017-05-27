@@ -115,6 +115,14 @@ body {margin:0px;
 	 				  height:170px;}
 
 
+	#sideCol { width:298px; 
+		margin-left:980px; 
+		float:right;
+		box-sizing: border-box;
+		border: 1px solid #bdd1fc;
+			   }
+	#mainCont { width:980px; float:left;}
+
 
 	    #InvFormCont {  }
 
